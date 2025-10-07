@@ -1,13 +1,32 @@
+import path from 'path';
 import * as vscode from 'vscode';
+import {
+    LanguageClient,
+    LanguageClientOptions,
+    ServerOptions,
+    TransportKind
+} from 'vscode-languageclient/node';
+
+let client: LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('Congratulations, your extension "sol-novel" is now active!');
+    const serverCommand = "/home/mrpedrobraga/Development/novel-lang/target/debug/novel";
 
-    const disposable = vscode.commands.registerCommand('sol-novel.sayHi', () => {
-        vscode.window.showInformationMessage('Hello World from sol-novel!');
-    });
+    let serverOptions: ServerOptions = {
+        run: { command: serverCommand, args: ['serve'] },
+        debug: { command: serverCommand, args: ['serve'] },
+    };
 
-    context.subscriptions.push(disposable);
+    let clientOptions: LanguageClientOptions = {
+        documentSelector: [{ scheme: 'file', language: 'novel' }],
+        synchronize: {
+            fileEvents: vscode.workspace.createFileSystemWatcher('**/.nov')
+        }
+    };
+
+    client = new LanguageClient('novelLanguageServer', 'Novel Language Server', serverOptions, clientOptions);
+
+    client.start();
 }
 
 export function deactivate() { }

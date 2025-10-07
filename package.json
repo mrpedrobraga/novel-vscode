@@ -2,6 +2,9 @@
     "name": "sol-novel",
     "displayName": "Sol Novel",
     "description": "Support for the \"novel\" markup language.",
+    "author": "mrpedrobraga",
+    "publisher": "mrpedrobraga",
+    "license": "MIT",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.104.0"
@@ -30,12 +33,6 @@
                 "scopeName": "source.novel",
                 "path": "./syntaxes/novel.tmLanguage.json"
             }
-        ],
-        "commands": [
-            {
-                "command": "sol-novel.sayHi",
-                "title": "Say hi"
-            }
         ]
     },
     "scripts": {
@@ -45,6 +42,10 @@
         "pretest": "npm run compile && npm run lint",
         "lint": "eslint src --ext ts",
         "test": "node ./out/test/runTests.js"
+    },
+    "dependencies": {
+        "glob": "^11.0.0",
+        "vscode-languageclient": "^9.0.1"
     },
     "devDependencies": {
         "@types/vscode": "^1.84.0",
