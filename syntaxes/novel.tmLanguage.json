@@ -1,0 +1,90 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Novel",
+    "scopeName": "source.novel",
+    "patterns": [
+        { "include": "#frontmatter" },
+        { "include": "#scene-header" },
+        { "include": "#metadata" },
+        { "include": "#comment" },
+        { "include": "#tagged-action" },
+        { "include": "#dialogue" },
+        { "include": "#new-speaker" },
+        { "include": "#reference" },
+        { "include": "#rich-text" }
+    ],
+    "repository": {
+        "frontmatter": {
+            "name": "comment.block",
+            "begin": "^---\\s*$",
+            "end": "^---\\s*$",
+            "patterns": [
+                {
+                    "name": "variable.parameter",
+                    "match": "^([A-Za-z0-9_-]+)(?=\\s*:)",
+                    "captures": {
+                        "1": { "name": "variable.parameter" },
+                        "2": { "name": "string.unquoted.metadata-value.novel" }
+                    }
+                },
+                {
+                    "name": "string.quoted.rich-text.novel",
+                    "match": "\\\"[^\\\"]*\\\""
+                }
+            ]
+        },
+        "scene-header": {
+            "name": "entity.name.function",
+            "match": "^==\\s*([^=]+?)\\s*=="
+        },
+        "metadata": {
+            "name": "comment.block",
+            "match": "^(Where|When|Who|Music|Mood)\\s*:\\s*.*$",
+            "captures": {
+                "1": { "name": "variable.parameter" },
+                "2": { "name": "string.unquoted.metadata-value.novel" }
+            }
+        },
+        "comment": {
+            "name": "comment.line.double-slash.novel",
+            "match": "^\\s*//.*$"
+        },
+        "tagged-action": {
+            "name": "meta.tagged-action.novel",
+            "match": "^\\s*>\\s*([A-Z0-9_]+)\\s*:\\s*(.*)$",
+            "captures": {
+                "1": { "name": "keyword.operator.tag.novel" },
+                "2": { "name": "text" }
+            }
+        },
+        "dialogue": {
+            "name": "meta.dialogue.novel",
+            "match": "^\\s*-\\s*([^\n]*)$",
+            "captures": { "1": { "name": "text" } }
+        },
+        "new-speaker": {
+            "name": "markup.underline.link",
+            "match": "^\\s*\\[([^\\]]+)\\]\\s*$"
+        },
+        "reference": {
+            "name": "markup.underline.link",
+            "match": "\\[[^\\]]+\\]"
+        },
+        "rich-text": {
+            "patterns": [
+                {
+                    "name": "markup.bold",
+                    "match": "\\*{2}.+?\\*{2}"
+                },
+                {
+                    "name": "markup.italic",
+                    "match": "\\*.+?\\*"
+                },
+                {
+                    "name": "constant.character.special.reference.inline.novel",
+                    "match": "\\[[^\\]]+\\]"
+                }
+            ]
+        }
+    }
+}
