@@ -1,7 +1,7 @@
 {
-    "name": "novel-vscode",
-    "displayName": "novel-vscode",
-    "description": "Support for the novel programming language.",
+    "name": "sol-novel",
+    "displayName": "Sol Novel",
+    "description": "Support for the \"novel\" markup language.",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.104.0"
@@ -9,15 +9,8 @@
     "categories": [
         "Programming Languages"
     ],
-    "activationEvents": [],
     "main": "./out/extension.js",
     "contributes": {
-        "commands": [
-            {
-                "command": "novel-vscode.helloWorld",
-                "title": "Hello World"
-            }
-        ],
         "languages": [
             {
                 "id": "novel",
@@ -37,6 +30,12 @@
                 "scopeName": "source.novel",
                 "path": "./syntaxes/novel.tmLanguage.json"
             }
+        ],
+        "commands": [
+            {
+                "command": "sol-novel.sayHi",
+                "title": "Say hi"
+            }
         ]
     },
     "scripts": {
@@ -44,18 +43,21 @@
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile && npm run lint",
-        "lint": "eslint src",
-        "test": "vscode-test"
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTests.js"
     },
     "devDependencies": {
-        "@types/vscode": "^1.104.0",
-        "@types/mocha": "^10.0.10",
-        "@types/node": "22.x",
-        "@typescript-eslint/eslint-plugin": "^8.45.0",
-        "@typescript-eslint/parser": "^8.45.0",
-        "eslint": "^9.36.0",
-        "typescript": "^5.9.3",
-        "@vscode/test-cli": "^0.0.11",
-        "@vscode/test-electron": "^2.5.2"
+        "@types/vscode": "^1.84.0",
+        "@types/node": "^18.17.1",
+        "@types/mocha": "^10.0.6",
+        "eslint": "^8.51.0",
+        "@typescript-eslint/eslint-plugin": "^6.8.0",
+        "@typescript-eslint/parser": "^6.8.0",
+        "mocha": "^10.2.0",
+        "typescript": "^5.2.2",
+        "@vscode/test-electron": "^2.3.4",
+        "ts-loader": "^9.5.0",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4"
     }
 }

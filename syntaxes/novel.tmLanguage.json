@@ -3,15 +3,36 @@
     "name": "Novel",
     "scopeName": "source.novel",
     "patterns": [
-        { "include": "#frontmatter" },
-        { "include": "#scene-header" },
-        { "include": "#metadata" },
-        { "include": "#comment" },
-        { "include": "#tagged-action" },
-        { "include": "#dialogue" },
-        { "include": "#new-speaker" },
-        { "include": "#reference" },
-        { "include": "#rich-text" }
+        {
+            "include": "#frontmatter"
+        },
+        {
+            "include": "#scene-header"
+        },
+        {
+            "include": "#metadata"
+        },
+        {
+            "include": "#comment"
+        },
+        {
+            "include": "#tagged-action"
+        },
+        {
+            "include": "#dialogue"
+        },
+        {
+            "include": "#new-speaker"
+        },
+        {
+            "include": "#reference"
+        },
+        {
+            "include": "#rich-text"
+        },
+        {
+            "include": "#directives"
+        }
     ],
     "repository": {
         "frontmatter": {
@@ -23,8 +44,12 @@
                     "name": "variable.parameter",
                     "match": "^([A-Za-z0-9_-]+)(?=\\s*:)",
                     "captures": {
-                        "1": { "name": "variable.parameter" },
-                        "2": { "name": "string.unquoted.metadata-value.novel" }
+                        "1": {
+                            "name": "variable.parameter"
+                        },
+                        "2": {
+                            "name": "string.unquoted.metadata-value.novel"
+                        }
                     }
                 },
                 {
@@ -41,8 +66,12 @@
             "name": "comment.block",
             "match": "^(Where|When|Who|Music|Mood)\\s*:\\s*.*$",
             "captures": {
-                "1": { "name": "variable.parameter" },
-                "2": { "name": "string.unquoted.metadata-value.novel" }
+                "1": {
+                    "name": "variable.parameter"
+                },
+                "2": {
+                    "name": "string.unquoted.metadata-value.novel"
+                }
             }
         },
         "comment": {
@@ -53,14 +82,22 @@
             "name": "meta.tagged-action.novel",
             "match": "^\\s*>\\s*([A-Z0-9_]+)\\s*:\\s*(.*)$",
             "captures": {
-                "1": { "name": "keyword.operator.tag.novel" },
-                "2": { "name": "text" }
+                "1": {
+                    "name": "keyword.operator.tag.novel"
+                },
+                "2": {
+                    "name": "text"
+                }
             }
         },
         "dialogue": {
             "name": "meta.dialogue.novel",
             "match": "^\\s*-\\s*([^\n]*)$",
-            "captures": { "1": { "name": "text" } }
+            "captures": {
+                "1": {
+                    "name": "text"
+                }
+            }
         },
         "new-speaker": {
             "name": "markup.underline.link",
@@ -83,6 +120,22 @@
                 {
                     "name": "constant.character.special.reference.inline.novel",
                     "match": "\\[[^\\]]+\\]"
+                }
+            ]
+        },
+        "directives": {
+            "patterns": [
+                {
+                    "name": "keyword.control",
+                    "match": "@IF"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "@CONT"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "@SET"
                 }
             ]
         }
